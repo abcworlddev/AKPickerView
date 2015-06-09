@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, AKPickerViewStyle) {
 @property (nonatomic, assign) AKPickerViewStyle pickerViewStyle;
 @property (nonatomic, assign, readonly) NSUInteger selectedItem;
 @property (nonatomic, assign, readonly) CGPoint contentOffset;
+@property (nonatomic, assign) BOOL pageEnabled;
 
 - (void)reloadData;
 - (void)scrollToItem:(NSUInteger)item animated:(BOOL)animated;

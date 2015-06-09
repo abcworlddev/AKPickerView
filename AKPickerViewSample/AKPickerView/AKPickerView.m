@@ -152,6 +152,38 @@
 	});
 }
 
+- (void)setPageEnabled:(BOOL)pageEnabled
+{
+    _pageEnabled = pageEnabled;
+    
+    if (_pageEnabled) {
+        self.collectionView.scrollEnabled = NO;
+        
+        UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipedFromLeft:)];
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        [self addGestureRecognizer:leftSwipeGestureRecognizer];
+        
+        UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipedFromRight:)];
+        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        [self addGestureRecognizer:rightSwipeGestureRecognizer];
+    }
+}
+
+- (void)didSwipedFromLeft:(UISwipeGestureRecognizer *)swipGesture
+{
+    NSUInteger index = self.selectedItem + 1;
+    NSUInteger count = [self.dataSource numberOfItemsInPickerView:self];
+    index = (index < count - 1)? index : count - 1;
+    if (index != self.selectedItem) [self selectItem:index animated:YES];
+}
+
+- (void)didSwipedFromRight:(UISwipeGestureRecognizer *)swipGesture
+{
+    NSInteger index = self.selectedItem - 1;
+    index = (index > 0)? index : 0;
+    if (index != self.selectedItem) [self selectItem:index animated:YES];
+}
+
 #pragma mark -
 
 - (AKCollectionViewLayout *)collectionViewLayout

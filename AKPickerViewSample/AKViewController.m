@@ -33,6 +33,7 @@
 	self.pickerView.fisheyeFactor = 0.001;
 	self.pickerView.pickerViewStyle = AKPickerViewStyle3D;
 	self.pickerView.maskDisabled = false;
+    self.pickerView.pageEnabled = true;
 
 	self.titles = @[@"Tokyo",
 					@"Kanagawa",
